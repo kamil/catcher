@@ -1,2 +1,5 @@
 development:
   database: catcher_development
+
+production:
+  uri: <%= ENV['MONGODB_URL'] %>
