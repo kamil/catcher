@@ -23,6 +23,13 @@ GEM
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    racksh (1.0.0)
+      rack (>= 1.0)
+      rack-test (>= 0.5)
+    shotgun (0.9)
+      rack (>= 1.0)
     sinatra (1.3.3)
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
@@ -37,4 +44,6 @@ DEPENDENCIES
   bson_ext (~> 1.4)
   json_pure
   mongoid (~> 2.5.0)
+  racksh
+  shotgun
   sinatra
