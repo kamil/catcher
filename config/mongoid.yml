@@ -3,3 +3,4 @@ development:
 
 production:
   uri: <%= ENV['MONGODB_URL'] %>
+  logger: false
