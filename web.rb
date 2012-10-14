@@ -8,6 +8,9 @@ Mongoid.load!("config/mongoid.yml")
 disable :protection
 set :show_exceptions, true
 
+configure :production do
+end
+
 class Request
   include Mongoid::Document
   field :m, type: String # REQUEST_METHOD
@@ -56,7 +59,16 @@ catcher '*' do
 
   Request.create(attrib)
 
-  '1'
+  {
+    "text/xml" => "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<request>saved</request>\n",
+    "application/javascript" => "{\"request\":\"saved\"}"
+  }.each do |content,resp|
+    if request.accept? content
+      content_type content
+      return resp
+    end
+  end
+
+  return "saved"
 
 end
-
