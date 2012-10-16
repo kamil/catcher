@@ -33,6 +33,17 @@ def catcher(path, opts={}, &block)
   head(path, opts, &block)
 end
 
+get '/data/latest' do
+  Request.where(params).limit(100).order_by(:t,:desc).map { |d|
+    pry = {}
+    %w{ t m a r q c p h b x }.each do |atrib|
+      pry[atrib] = d[atrib]
+    end
+
+    pry
+  }.to_json
+end
+
 catcher '*' do
 
   attrib = {
