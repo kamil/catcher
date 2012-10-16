@@ -36,7 +36,7 @@ end
 get '/data/latest' do
   Request.where(params).limit(100).order_by(:t,:desc).map { |d|
     pry = {}
-    %w{ t m a r q c p h b x }.each do |atrib|
+    %w{ t m a r q c p h b x j }.each do |atrib|
       pry[atrib] = d[atrib]
     end
 
