@@ -34,6 +34,9 @@ def catcher(path, opts={}, &block)
 end
 
 get '/data/latest' do
+
+  content_type 'application/json'
+
   Request.where(params).limit(100).order_by(:t,:desc).map { |d|
     pry = {}
     %w{ t m a r q c p h x j }.each do |atrib|
