@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'mongoid'
-require 'json/pure'
+#require 'json/pure'
 
 Mongoid.load!("config/mongoid.yml")
 
@@ -37,17 +37,15 @@ get '/data/latest' do
 
   content_type 'application/json'
 
-  Request.where(params).limit(100).order_by(:t,:desc).map { |d|
-    pry = {}
-    %w{ t m a r q c p h x j }.each do |atrib|
-      pry[atrib] = d[atrib]
-    end
+  Request.only((params[:only]  || 't,m,a,r,q,c,p,h,x,j').split(','))
+         .where(params[:query] || {})
+         .limit(params[:limit] || 10)
+         .skip(params[:skip] || 0)
+         .order_by(:_id,:desc).map { |row| row.attributes }.to_json
 
-    pry
-  }.to_json
 end
 
-catcher '*' do
+catcher '/*' do
 
   attrib = {
     t: Time.now,
