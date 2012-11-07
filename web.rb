@@ -47,6 +47,11 @@ end
 
 catcher '/*' do
 
+  headers({
+    'Access-Control-Allow-Origin' => '*'
+  })
+
+
   attrib = {
     t: Time.now,
     m: request.env["REQUEST_METHOD"],
